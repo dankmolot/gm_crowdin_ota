@@ -86,7 +86,7 @@ function OTA_CLIENT:GetManifest()
     if self.manifestCache and not self.disableManifestCache then
         return self.manifestCache
     else
-        self.manifestCache = JSONRequest(self.BASE_URL .. "/" .. self.hash .. "/manifest.json")
+        self.manifestCache = HTTPRequest(self.BASE_URL .. "/" .. self.hash .. "/manifest.json")
         return self.manifestCache
     end
 end
@@ -147,7 +147,7 @@ function OTA_CLIENT:GetFileTranslations(file, lang)
     url = url .. "/" .. lang .. file
     url = url .. "?timestamp=" .. self:GetManifestTimestamp():Await()
 
-    return JSONRequest(url):Catch(emptyFunc)
+    return HTTPRequest(url):Catch(emptyFunc)
 end
 OTA_CLIENT.GetFileTranslations = promise.Async(OTA_CLIENT.GetFileTranslations)
 
