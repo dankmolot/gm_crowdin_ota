@@ -186,7 +186,7 @@ function OTA_CLIENT:GetStringsByFilesAndLocale(files, lang)
     local strings = {}
     for _, filePath in ipairs(files) do
         local content
-        local fileCache = self.stringsCache[filePath] and promise.Await(self.stringsCache[filePath][lang] or {})
+        local fileCache = self.stringsCache[filePath] and promise.Await(self.stringsCache[filePath][lang])
         if fileCache then
             content = fileCache
         else
